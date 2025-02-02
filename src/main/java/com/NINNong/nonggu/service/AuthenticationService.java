@@ -16,12 +16,6 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void signup(String email, String rawPassword, String name) {
-        String encodedPassword = passwordEncoder.encode(rawPassword);
-        Member member = new Member(email, name, encodedPassword);
-        MemberEntity memberEntity = MemberEntity.fromDomain(member);
-        memberRepository.save(memberEntity);
-    }
 
     public  boolean login(String email, String rawPassword) {
         MemberEntity member = memberRepository.findByEmail(email)
