@@ -23,15 +23,22 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/swagger-ui/**", // Swagger UI 허용
-                                "/v3/api-docs/**" // OpenAPI 문서 허용
+                                "/v3/api-docs/**", // OpenAPI 문서 허용
+                                "/login",
+                                "/signup"
                         ).permitAll() // 인증 없이 접근 허용
                         .anyRequest().authenticated() // 나머지 요청은 인증 필요
                 )
-                .formLogin(form -> form
-                        .defaultSuccessUrl("/") // 로그인 성공 시 이동할 기본 경로
+                .formLogin(login -> login
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true) // 로그인 성공 시 이동할 기본 경로
                         .permitAll()
                 )
-                .logout(logout -> logout.permitAll()); // 로그아웃 허용
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID"));
         return http.build();
     }
 }

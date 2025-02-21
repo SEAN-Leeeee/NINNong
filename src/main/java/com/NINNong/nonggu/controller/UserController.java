@@ -1,29 +1,32 @@
 package com.NINNong.nonggu.controller;
 
 
-import com.NINNong.nonggu.dto.MemberSignupRequest;
+import com.NINNong.nonggu.dto.UserSignupRequest;
 import com.NINNong.nonggu.service.AuthenticationService;
+import com.NINNong.nonggu.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/members")
-public class MemberController {
+@RequestMapping("/api/users")
+public class UserController {
     private final AuthenticationService authenticationService;
+    private final UserService userService;
 
-    public MemberController(AuthenticationService authenticationService) {
+    public UserController(AuthenticationService authenticationService, UserService userService) {
         this.authenticationService = authenticationService;
+        this.userService = userService;
     }
 
     @PostMapping("/sign")
-    public ResponseEntity<String> signup(@RequestBody MemberSignupRequest request) {
-        authenticationService.signup(request.getEmail(), request.getPassword(), request.getName());
+    public ResponseEntity<String> signup(@RequestBody UserSignupRequest request) {
+        userService.signup(request);
         return ResponseEntity.ok("회원가입 성공!");
     }
 
     @PostMapping("/login")
     public ResponseEntity<Boolean> login(@RequestParam String email, @RequestParam String password) {
-        boolean isValid = authenticationService.login(email, password);
+        boolean isValid = userService.login(email, password);
         return ResponseEntity.ok(isValid);
     }
 }
