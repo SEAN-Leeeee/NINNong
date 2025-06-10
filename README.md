@@ -11,12 +11,17 @@
 객체지향 설계(OOP) 사고방식을 실습하기 위해 실무 수준의 REST API 구조와 책임 기반 코드 구성을 학습하고자
 도메인 중심의 구조로 테스트하기 좋은 백엔드 설계 연습
 
----
-
 ## 사용 기술
 
 - Java 17
-- Spring Boot 3.x
+- Spring Boot 3.5.0
 - Gradle
 - JPA + H2 (현재), 이후 MySQL로 확장 예정
 - GitHub Actions (CI/CD 연습 예정)
+
+## Spring Boot 기반 백엔드 API 개발
+
+-	Spring Boot 기반의 백엔드 API 프로젝트 진행
+-	팀, 유저, 팀멤버 도메인을 중심으로 RESTful API 설계 및 구현
+-	프론트엔드 연동을 위한 JSON 기반의 응답 구조 제공
+-	향후 Swagger 문서화 및 보안 인증 추가 예정
