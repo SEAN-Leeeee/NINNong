@@ -1,4 +1,4 @@
 package com.sean.ninnong.user;
 
-public class UserService {
+public interface UserService {
 }

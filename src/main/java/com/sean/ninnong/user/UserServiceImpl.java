@@ -1,4 +1,7 @@
 package com.sean.ninnong.user;
 
-public class UserServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserServiceImpl implements UserService {
 }

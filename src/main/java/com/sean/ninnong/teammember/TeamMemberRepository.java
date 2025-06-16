@@ -1,4 +1,4 @@
-package com.sean.ninnong.teamMember;
+package com.sean.ninnong.teammember;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

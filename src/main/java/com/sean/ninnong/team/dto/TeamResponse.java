@@ -1,4 +1,4 @@
-package com.sean.ninnong.team;
+package com.sean.ninnong.team.dto;
 
 import java.time.LocalDateTime;
 

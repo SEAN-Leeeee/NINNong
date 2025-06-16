@@ -1,13 +1,12 @@
-package com.sean.ninnong.teamMember;
+package com.sean.ninnong.teammember.dto;
 
+import com.sean.ninnong.teammember.TeamMember;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
-import java.util.Date;
-
 @Getter
-public class TeamMemberDTO {
+public class TeamMemberRequest {
     @NotNull @Min(1)
     private Long userId;
     private TeamMember.Role role;
