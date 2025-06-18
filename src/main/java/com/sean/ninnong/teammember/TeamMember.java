@@ -1,10 +1,8 @@
 package com.sean.ninnong.teammember;
 
+import com.sean.ninnong.common.type;
 import com.sean.ninnong.teammember.dto.TeamMemberRequest;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -12,35 +10,34 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 public class TeamMember {
-    public enum Role {LEADER, MEMBER, GUEST}
-    public enum Status { PENDING, ACTIVE, STOPPED, LEAVE }
+    public enum MemberStatus { PENDING, ACTIVE, STOPPED, LEAVE }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long teamId;
     private Long userId;
-    private Role role;
+    @Enumerated(EnumType.STRING)
+    private type.Role role;
     private int backNumber;
     private LocalDateTime joinedAt;
-    private Status status;
+    @Enumerated(EnumType.STRING)
+    private MemberStatus status;
 
-    public TeamMember(TeamMemberRequest info, Long teamId) {
+    public TeamMember(Long teamId, TeamMemberRequest info) {
         this.userId = info.getUserId();
         this.teamId = teamId;
         this.role = info.getRole();
-        this.backNumber = info.getBackNumber();
         this.joinedAt = LocalDateTime.now();
         this.status = info.getStatus();
     }
 
-    public static TeamMember of(TeamMemberRequest info, Long teamId) {
-        return new TeamMember(info, teamId);
+    public static TeamMember of(Long teamId, TeamMemberRequest info) {
+        return new TeamMember(teamId, info);
     }
 
     public void asLeader() {
-        this.role = Role.LEADER;
+        this.role = type.Role.LEADER;
     }
-    public void updateTeamId(Long teamId) {this.teamId = teamId;}
 
  /*   public TeamMember kickMember() {
 
@@ -54,11 +51,11 @@ public class TeamMember {
         this.backNumber = backNumber;
     }
 
-    public void updateRole(Role role) {
+    public void updateRole(type.Role role) {
         this.role = role;
     }
 
-    public void updateStatus(Status status) {
+    public void updateStatus(MemberStatus status) {
         this.status = status;
     }
 }

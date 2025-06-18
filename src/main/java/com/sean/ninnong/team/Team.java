@@ -1,8 +1,9 @@
 package com.sean.ninnong.team;
 
+import com.sean.ninnong.common.type.ApplicationStatus;
 import com.sean.ninnong.exception.UnauthorizedTeamAccessException;
 import com.sean.ninnong.team.dto.TeamInfoRequest;
-import com.sean.ninnong.team.dto.TeamListResponse;
+import com.sean.ninnong.team.dto.TeamResponse;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -59,8 +60,8 @@ public class Team {
     }
 
 
-    public TeamListResponse toListResponse() {
-        return new TeamListResponse(id, name, region, logo, description);
+    public TeamResponse toResponse() {
+        return new TeamResponse(id, name, region, logo, description);
     }
 
     public void validateAuthorization(Long userId) {
@@ -68,4 +69,6 @@ public class Team {
             throw new UnauthorizedTeamAccessException(this.id);
         }
     }
+
+
 }
